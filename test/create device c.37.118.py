@@ -17,7 +17,7 @@ def run(playwright: Playwright) -> None:
     # Press Tab
     page.locator("text=Логин >> input").press("Tab")
     # Fill input[type="password"]
-    page.locator("input[type=\"password\"]").fill("*******")
+    page.locator("input[type=\"password\"]").fill("exemple_password")
     # Press Enter
     page.locator("input[type=\"password\"]").press("Enter")
     page.wait_for_url("https://beta.au.alterosmart.dev/")
