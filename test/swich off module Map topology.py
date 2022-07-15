@@ -1,7 +1,8 @@
 from playwright.sync_api import Playwright, sync_playwright, expect
 
-
 def run(playwright: Playwright) -> None:
+    expected_list = ("text=Equipment map", "text=Dashboards", "text=Alerts", "text=Import/Export", "text=Journal", "text=Catalogs", "text=Reports", "text=Libraries", "text=Settings", "text=Monitoring")
+    element_list = ("text=Dashboards", "text=Alerts", "text=Import/Export", "text=Journal", "text=Catalogs", "text=Reports", "text=Libraries", "text=Settings", "text=Monitoring")
     browser = playwright.chromium.launch(headless=False, slow_mo=500)
     context = browser.new_context(viewport={"width":1920,"height":1080}, storage_state="auth.json")
 
@@ -30,9 +31,11 @@ def run(playwright: Playwright) -> None:
     # Click text=Map topologyMap topology >> label span
     page.locator("text=Map topologyMap topology >> label span").click()
 
-    # Click text=Equipment map
-    page.locator("text=Equipment map").click()
-    page.wait_for_url("https://beta.au.alterosmart.dev/map")
+    assert expected_list == element_list
+
+    # # Click text=Equipment map
+    # page.locator("text=Equipment map").click()
+    # page.wait_for_url("https://beta.au.alterosmart.dev/map")
 
     # ---------------------
     context.close()
